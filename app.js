@@ -6,6 +6,11 @@ const PORT = 3000;
 const app = express();
 app.use(express.json());
 
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    next();
+  });
+
 
 // ROUTES
 app.post('/post', async (req, res) => {
