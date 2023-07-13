@@ -39,7 +39,7 @@ app.post('/post', async (req, res) => {
     if(actionPost) {
         res.send("Successful post!");
     } else {
-        res.send("Post failed");
+        res.send("Post failed!");
     }
     
 });
