@@ -18,28 +18,16 @@ app.use(cors({
 app.post('/post', async (req, res) => {
 
     var dataAtual = new Date();
-    var dia = dataAtual.getDate();
-    var mes = dataAtual.getMonth() + 1;
-    var ano = dataAtual.getFullYear();
-    var hora = dataAtual.getHours();
-    var minutos = dataAtual.getMinutes();
-
-    if (dia < 10) {
-        dia = '0' + dia;
-    }
-    if (mes < 10) {
-        mes = '0' + mes;
-    }
-    if (hora < 10) {
-        hora = '0' + hora;
-    }
-    if (minutos < 10) {
-        minutos = '0' + minutos;
-    }
-
+    var options = { timeZone: 'America/Sao_Paulo' };
+    var dia = dataAtual.toLocaleString('pt-BR', options, { day: '2-digit' });
+    var mes = dataAtual.toLocaleString('pt-BR', options, { month: '2-digit' });
+    var ano = dataAtual.toLocaleString('pt-BR', options, { year: 'numeric' });
+    var hora = dataAtual.toLocaleString('pt-BR', options, { hour: '2-digit', hour12: false });
+    var minutos = dataAtual.toLocaleString('pt-BR', options, { minute: '2-digit' });
+    
     var dataFormatada = dia + '/' + mes + '/' + ano;
     var horaFormatada = hora + ':' + minutos;
-
+    
     let author = req.body.author;
     let message = req.body.message;
     let date = horaFormatada + ' | ' + dataFormatada;
