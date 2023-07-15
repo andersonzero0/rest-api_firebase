@@ -19,8 +19,10 @@ app.post('/post', async (req, res) => {
 
     var dataAtual = new Date();
     var dia = dataAtual.getDate();
-    var mes = dataAtual.getMonth() + 1; 
+    var mes = dataAtual.getMonth() + 1;
     var ano = dataAtual.getFullYear();
+    var hora = dataAtual.getHours();
+    var minutos = dataAtual.getMinutes();
 
     if (dia < 10) {
         dia = '0' + dia;
@@ -28,18 +30,25 @@ app.post('/post', async (req, res) => {
     if (mes < 10) {
         mes = '0' + mes;
     }
+    if (hora < 10) {
+        hora = '0' + hora;
+    }
+    if (minutos < 10) {
+        minutos = '0' + minutos;
+    }
 
     var dataFormatada = dia + '/' + mes + '/' + ano;
+    var horaFormatada = hora + ':' + minutos;
 
     let author = req.body.author;
     let message = req.body.message;
-    let date = dataFormatada;
+    let date = dataFormatada + ' ' + horaFormatada;
 
     const post = {
         author: author,
         message: message,
         date: date
-    }
+    };
 
     const actionPost = await addPost(post);
 
