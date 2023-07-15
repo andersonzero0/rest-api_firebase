@@ -42,7 +42,7 @@ app.post('/post', async (req, res) => {
 
     let author = req.body.author;
     let message = req.body.message;
-    let date = dataFormatada + ' ' + horaFormatada;
+    let date = horaFormatada + ' | ' + dataFormatada;
 
     const post = {
         author: author,
