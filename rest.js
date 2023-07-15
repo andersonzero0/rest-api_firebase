@@ -1,5 +1,5 @@
 import db from "./db.js";
-import { collection, query, addDoc, getDocs } from "firebase/firestore";
+import { collection, query, addDoc, getDocs, orderBy, limit } from "firebase/firestore";
 
 async function addPost(data) {
 
@@ -25,7 +25,7 @@ async function getPosts() {
 
     try {
 
-        const q = query(collection(db, "posts"));
+        const q = query(collection(db, "posts"), orderBy("date", "desc"), limit(20));
         const querySnapshot = await getDocs(q);
 
         const posts = [];
