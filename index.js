@@ -18,24 +18,26 @@ app.use(cors({
 app.post('/post', async (req, res) => {
 
     var dataAtual = new Date();
-    var options = { timeZone: 'America/Sao_Paulo' };
-    var dia = dataAtual.toLocaleString('pt-BR', options, { day: '2-digit' });
-    var mes = dataAtual.toLocaleString('pt-BR', options, { month: '2-digit' });
-    var ano = dataAtual.toLocaleString('pt-BR', options, { year: 'numeric' });
-    var hora = dataAtual.toLocaleString('pt-BR', options, { hour: '2-digit', hour12: false });
-    var minutos = dataAtual.toLocaleString('pt-BR', options, { minute: '2-digit' });
+    var options = { 
+      timeZone: 'America/Sao_Paulo', 
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit'
+    };
     
-    var dataFormatada = dia + '/' + mes + '/' + ano;
-    var horaFormatada = hora + ':' + minutos;
+    var dataFormatada = dataAtual.toLocaleString('pt-BR', options);
     
     let author = req.body.author;
     let message = req.body.message;
-    let date = horaFormatada + ' | ' + dataFormatada;
-
+    let date = dataFormatada;
+    
     const post = {
-        author: author,
-        message: message,
-        date: date
+      author: author,
+      message: message,
+      date: date
     };
 
     const actionPost = await addPost(post);
